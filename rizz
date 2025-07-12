@@ -1,0 +1,238 @@
+%-------------------------
+% ATS-Friendly Resume in Latex (Original Format)
+% Author: Vishwas Tiwari (Modified for ATS optimization)
+% License: MIT
+
+%-------------------------
+
+%---- Required Packages and Functions ----
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{latexsym}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{ragged2e}
+\usepackage[empty]{fullpage}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage{marvosym}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{cfr-lm}
+\usepackage[T1]{fontenc}
+\setlength{\multicolsep}{0pt} 
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\geometry{left=1.4cm, top=0.8cm, right=1.2cm, bottom=1cm}
+
+\usepackage[most]{tcolorbox}
+\tcbset{
+	frame code={},
+	center title,
+	left=0pt,
+	right=0pt,
+	top=0pt,
+	bottom=0pt,
+	colback=gray!20,
+	colframe=white,
+	width=\dimexpr\textwidth\relax,
+	enlarge left by=-2mm,
+	boxsep=4pt,
+	arc=0pt,outer arc=0pt,
+}
+
+\urlstyle{same}
+
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting - Using standard section titles for better ATS parsing
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item{
+    \textbf{#1}{: #2 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumePOR}[3]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1}\hspace{0.3mm}#2 & \textit{\small{#3}} 
+    \end{tabular*}
+    \vspace{-2mm}
+}
+
+\newcommand{\resumeSubheading}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#4}} \\
+        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeProject}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#3}} \\
+        \footnotesize{\textit{#2}} & \footnotesize{#4}
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny\bullet}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=0mm]}
+\newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
+\newcommand{\resumeItemListStart}{\begin{justify}\begin{itemize}[leftmargin=3ex, rightmargin=2ex, noitemsep,labelsep=1.2mm,itemsep=0mm]\small}
+
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{2mm}}
+\newcommand{\resumeHeadingSkillEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\end{justify}\vspace{-2mm}}
+\newcommand{\cvsection}[1]{%
+\vspace{2mm}
+\begin{tcolorbox}
+    \textbf{\large #1}
+\end{tcolorbox}
+    \vspace{-4mm}
+}
+
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+%---- End of Packages and Functions ------
+
+%-------------------------------------------
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%
+%%%%%% DEFINE ELEMENTS HERE %%%%%%%
+\newcommand{\name}{Vishwas Tiwari} 
+\newcommand{\course}{Bachelor of Technology} 
+\newcommand{\roll}{2022UG3026} 
+\newcommand{\phone}{9555165910} 
+\newcommand{\github}{https://github.com/vishwastiwarig}
+\newcommand{\emailb}{vishwastiwari222@gmail.com}
+\newcommand{\emaila}{vishwas.2022ug3026@iiitranchi.ac.in} 
+\newcommand{\linkedin}{https://www.linkedin.com/in/vishwas-tiwari-820bb125b}
+
+\begin{document}
+\fontfamily{cmr}\selectfont
+%----------HEADING-----------------
+
+% Header with contact information - structured for ATS
+\parbox{2.35cm}{%
+% Comment out image until you upload it to Overleaf
+% \includegraphics[width=2cm,clip]{imageslo.jpeg}
+}
+\parbox{\dimexpr\linewidth-2.8cm\relax}{
+\begin{tabularx}{\linewidth}{L r} \\
+  \textbf{\Large \name} & {\raisebox{0.0\height}{\footnotesize \faPhone}\ +91-\phone}\\
+  {Computer Science Engineering - Data Science and Artificial Intelligence} & \href{mailto:\emaila}{\raisebox{0.0\height}{\footnotesize \faEnvelope}\ {\emaila}} \\
+  {Indian Institute Of Information Technology, Ranchi} &  \href{mailto:\emailb}{\raisebox{0.0\height}{\footnotesize \faEnvelope}\ {\emailb}}\\
+  {B.Tech 2022-2026} &  \href{https://www.linkedin.com/in/vishwas-tiwari-820bb125b}{\raisebox{0.0\height}{\footnotesize \faLinkedin}\ LinkedIn} \\
+  {} & \href{https://github.com/vishwastiwarig}{\raisebox{0.0\height}{\footnotesize \faGithub}\ GitHub}
+\end{tabularx}
+}
+
+%-----------EDUCATION-----------
+\section{Education}
+\begin{itemize}[leftmargin=0.05in, label={}]
+    \small{\item{
+    \textbf{Indian Institute Of Information Technology (IIIT), Ranchi} \hfill \textbf{2022-2026} \\
+    \textit{Bachelor of Technology, Computer Science Engineering (Data Science and Artificial Intelligence)} \hfill \textit{}
+    }}
+\end{itemize}
+\vspace{-4mm}
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+
+
+\textbf{AI Intern} \hfill \textbf{June 2024 - Present}\\
+\textit{Coherent Market Insights} \hfill \textit{Onsite}\\
+Automated web-data extraction pipelines with \textbf{Selenium} \& \textbf{Power Automate}, cutting manual effort \textbf{70\%}; engineered a \textbf{FastAPI} microservice and \textbf{AGNO}-powered AI agents that feed real-time market-intelligence dashboards in \textbf{Power BI}. Deployed FastAPI micro-services on \textbf{ECS Fargate (AWS)} with auto-scaling, achieving 99.9\% uptime.
+
+\vspace{-2mm}
+\section{Technical Skills}
+  \vspace{1mm} 
+ \begin{itemize}[leftmargin=0.05in, label={}]
+    \small{\item{
+     \textbf{Programming Languages:} Python, C, C++, HTML, CSS, SQL, React, JavaScript  \\
+     \textbf{Machine Learning \& AI:} TensorFlow, PyTorch, Computer Vision, NLP, Generative AI, LLM's, Deep Learning, AgentGPT \\
+     \textbf{Cloud \& DevOps:} AWS Bedrock, Azure Cloud, Docker, Anaconda, Heroku, Microservices Architecture \\
+     \textbf{Developer Tools \& Frameworks:} Git, GitHub, VS Code, PyCharm, FastAPI, Flask, Selenium, Power Automate \\
+     \textbf{Data \& Analytics:} Power BI, Kaggle, SQL, Data Pipelines, ETL Processes, Real-time Analytics \\
+     \textbf{Soft Skills:} Communication, Teamwork, Problem-Solving, Time Management, Agile Methodologies
+    }}
+ \end{itemize}
+ \vspace{-7mm}
+
+%-----------PROJECTS-----------------
+\section{Projects}
+
+\textbf{Medical Chatbot - Generative AI with RAG} \hfill \href{https://github.com/vishwastiwarig/medicalbot\_genai}{(\textcolor{blue}{Github})}\\
+\textit{AI-Powered Healthcare Assistant | Python, Flask, GPT, Vector Database, Retrieval Augmented Generation}
+\begin{itemize}[leftmargin=3ex, rightmargin=2ex, noitemsep,labelsep=1.2mm,itemsep=0mm]
+\item Developed a medical AI assistant integrating GPT models with 1000+ indexed medical documents \textbf{using RAG}, implementing context-aware approach that reduced hallucinations and improved \textbf{accuracy by 35\%.}
+\item Engineered vector search capabilities with Pinecone delivering sub-100ms retrieval times across \textbf{15,000+ medical text segments} for real-time responses.
+\item Designed a Flask-based interface that integrates with existing healthcare systems while maintaining HIPAA-compliant security protocols
+\end{itemize}
+\vspace{-1mm}
+
+\textbf{RESORT-IT: Waste Classification System} \hfill \href{https://github.com/vishwastiwarig/-wastage\_Classification\_using\_VIt}{(\textcolor{blue}{Github})}\\
+\textit{Computer Vision \& Machine Learning | Python, Vision Transformer, Hugging Face, Image Classification}
+\begin{itemize}[leftmargin=3ex, rightmargin=2ex, noitemsep,labelsep=1.2mm,itemsep=0mm]
+\item Built waste classification system using \textbf{ViT architecture}, achieving \textbf{93.84\% accuracy} across multiple categories
+\item Fine-tuned Hugging Face models and integrated \textbf{AI chatbot} for recycling recommendations.
+\item Achieved \textbf{93.84\% accuracy} and \textbf{93.69\% F1-score} across multiple waste categories.
+\item Enhanced robustness by training on \textbf{45,000+ augmented images}, applying techniques to improve generalization.
+\end{itemize}
+\vspace{-2mm}
+
+\textbf{Image Caption Generator - AI Vision System} \hfill \href{https://github.com/vishwastiwarig/image-caption-generator}{(\textcolor{blue}{Github})}\\
+\textit{Computer Vision \& NLP | Python, TensorFlow, CNN-LSTM, Xception, Kaggle GPU}
+\begin{itemize}[leftmargin=3ex, rightmargin=2ex, noitemsep,labelsep=1.2mm,itemsep=0mm]
+\item Built \textbf{CNN-LSTM} image caption generator achieving impressive \textbf{70\% accuracy} on \textbf{8,000+ Flickr8k dataset images} with real-time processing capabilities
+\item Implemented end-to-end deep learning pipeline with \textbf{TensorFlow} efficiently processing \textbf{40,000+ text captions}.
+\item Optimized with GPU acceleration, reducing training time by \textbf{80\%} through efficient \textbf{batch processing.}
+\end{itemize}
+\vspace{-3mm}
+
+%-----------ACHIEVEMENTS-----------------
+
+\section{Achievements \& Certifications}
+\vspace{1mm}
+\begin{itemize}[leftmargin=0.05in, label={}]
+    \small{\item{
+     \textbf{Competitive Programming:} \textbf{1200} Rating on Codeforces and \textbf{1504} rating on Codechef \href{https://codeforces.com/profile/bORZ\_}{(\textcolor{blue}{CF Profile})} \href{https://codechef.com/users/vishwas2022ug}{(\textcolor{blue}{CC Profile})} \\
+     \vspace{2mm}
+     
+     \textbf{Problem Solving:} Solved \textbf{350+ algorithmic problems} on Leetcode, Codechef, and Codeforces platforms. \\
+     \vspace{2mm}
+     
+     \textbf{Hackathon Winner:} Secured \textbf{1st position} in Quasar Hackathon at IIIT Ranchi, demonstrating technical expertise. \\
+     \vspace{2mm}
+     
+     \textbf{Machine Learning Instructor:} Delivered Machine Learning sessions to over \textbf{60 Ph.D. scholars} during a Faculty Development Program (FDP) organized by AICTE at IIIT Ranchi
+    }}
+\end{itemize}
+\vspace{-2mm}
+
+%-------------------------------------------
+\end{document}
