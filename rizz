@@ -149,7 +149,7 @@
   {} & \href{https://github.com/vishwastiwarig}{\raisebox{0.0\height}{\footnotesize \faGithub}\ GitHub}
 \end{tabularx}
 }
-
+\vspace{-4mm}
 %-----------EDUCATION-----------
 \section{Education}
 \begin{itemize}[leftmargin=0.05in, label={}]
@@ -174,11 +174,11 @@ Automated web-data extraction pipelines with \textbf{Selenium} \& \textbf{Power 
  \begin{itemize}[leftmargin=0.05in, label={}]
     \small{\item{
      \textbf{Programming Languages:} Python, C, C++, HTML, CSS, SQL, React, JavaScript  \\
-     \textbf{Machine Learning \& AI:} TensorFlow, PyTorch, Computer Vision, NLP, Generative AI, LLM's, Deep Learning, AgentGPT \\
+     \textbf{Machine Learning \& AI:} TensorFlow, PyTorch, Computer Vision, NLP, Generative AI, LLM's, Deep Learning,Agentic Frameworks \\
      \textbf{Cloud \& DevOps:} AWS Bedrock, Azure Cloud, Docker, Anaconda, Heroku, Microservices Architecture \\
      \textbf{Developer Tools \& Frameworks:} Git, GitHub, VS Code, PyCharm, FastAPI, Flask, Selenium, Power Automate \\
      \textbf{Data \& Analytics:} Power BI, Kaggle, SQL, Data Pipelines, ETL Processes, Real-time Analytics \\
-     \textbf{Soft Skills:} Communication, Teamwork, Problem-Solving, Time Management, Agile Methodologies
+     
     }}
  \end{itemize}
  \vspace{-7mm}
