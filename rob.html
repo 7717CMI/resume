@@ -1,0 +1,916 @@
+{% extends "base.html" %}
+
+{% block title %}ROB Processing{% endblock %}
+
+{% block content %}
+<div class="container-modern">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <!-- Header -->
+            <div class="text-center mb-4">
+                <h2 class="fw-bold text-dark">ROB Daily</h2>
+                <p class="text-muted">Extract and prepare your ROB data for publishing by domain and subdomain for TODAY</p>
+            </div>
+
+            <!-- Main Form -->
+            <div class="card-modern">
+                <div class="card-header-modern">
+                    <h6 class="mb-0">
+                        <i class="fas fa-file-excel me-2"></i>
+                        Processing ROB
+                    </h6>
+                </div>
+                <div class="card-body-modern">
+                    <form method="POST" enctype="multipart/form-data" id="robForm">
+                        
+                        <!-- User Information -->
+                        <div class="row g-3 mb-4">
+                            <div class="col-12">
+                                <h6 class="text-primary mb-3">User Information for Open PR</h6>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="username" class="form-label-modern">
+                                    Username <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control form-control-modern" id="username" name="username" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="email" class="form-label-modern">
+                                    Email <span class="text-danger">*</span>
+                                </label>
+                                <input type="email" class="form-control form-control-modern" id="email" name="email" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="open_pr_id" class="form-label-modern">
+                                    Open PR ID <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control form-control-modern" id="open_pr_id" name="open_pr_id" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="mobile" class="form-label-modern">
+                                    Mobile <span class="text-danger">*</span>
+                                </label>
+                                <input type="tel" class="form-control form-control-modern" id="mobile" name="mobile" required>
+                            </div>
+                        </div>
+
+                        <!-- Domain & Subdomain Processing Settings -->
+                        <div class="row g-3 mb-4">
+                            <div class="col-12">
+                                <h6 class="text-primary mb-3">Domain & Subdomain Extraction Settings</h6>
+                                <div class="alert alert-info">
+                                    <strong>Instructions:</strong> Enter absolute numbers for each domain, then specify percentage distribution for subdomains within each domain.
+                                </div>
+                            </div>
+
+                            <!-- Healthcare (HC) Domain -->
+                            <div class="col-lg-4">
+                                <div class="card border-success">
+                                    <div class="card-header bg-success text-white">
+                                        <h6 class="mb-0">🏥 Healthcare (HC)</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <!-- Domain Total -->
+                                        <div class="mb-3">
+                                            <label for="hc_total" class="form-label fw-bold">
+                                                Total HC Words <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="number" class="form-control domain-input" id="hc_total" name="hc_total" 
+                                                   value="0" min="0" data-domain="hc">
+                                        </div>
+                                        
+                                        <!-- HC Subdomains -->
+                                        <div class="subdomain-section" id="hc_subdomains">
+                                            <label class="form-label fw-semibold text-muted">Subdomain Distribution (%)</label>
+                                            
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Medical Devices</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="hc_medical_devices_percent" value="0" min="0" max="100" 
+                                                               data-domain="hc" data-subdomain="medical_devices">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="hc_medical_devices_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Pharmaceutical</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="hc_pharmaceutical_percent" value="0" min="0" max="100" 
+                                                               data-domain="hc" data-subdomain="pharmaceutical">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="hc_pharmaceutical_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Biotechnology</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="hc_biotechnology_percent" value="0" min="0" max="100" 
+                                                               data-domain="hc" data-subdomain="biotechnology">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="hc_biotechnology_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Healthcare IT</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="hc_healthcare_it_percent" value="0" min="0" max="100" 
+                                                               data-domain="hc" data-subdomain="healthcare_it">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="hc_healthcare_it_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Clinical Diagnostic</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="hc_clinical_diagnostic_percent" value="0" min="0" max="100" 
+                                                               data-domain="hc" data-subdomain="clinical_diagnostic">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="hc_clinical_diagnostic_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Medical Imaging <span class="badge bg-info text-white" style="font-size: 0.6em;">AUTO</span></label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="hc_medical_imaging_percent" value="0" min="0" max="100" 
+                                                               data-domain="hc" data-subdomain="medical_imaging" readonly>
+                                                        <small class="text-muted">% (auto-calculated)</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="hc_medical_imaging_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mt-2 p-2 bg-light rounded">
+                                                <small><strong>HC Total:</strong> <span id="hc_percent_total">0</span>% | <span id="hc_words_total">0</span> words</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Chemical (CMFE) Domain -->
+                            <div class="col-lg-4">
+                                <div class="card border-warning">
+                                    <div class="card-header bg-warning text-dark">
+                                        <h6 class="mb-0">🧪 CMFE</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <!-- Domain Total -->
+                                        <div class="mb-3">
+                                            <label for="cmfe_total" class="form-label fw-bold">
+                                                Total CMFE Words <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="number" class="form-control domain-input" id="cmfe_total" name="cmfe_total" 
+                                                   value="0" min="0" data-domain="cmfe">
+                                        </div>
+                                        
+                                        <!-- CMFE Subdomains -->
+                                        <div class="subdomain-section" id="cmfe_subdomains" style="max-height: 400px; overflow-y: auto;">
+                                            <label class="form-label fw-semibold text-muted">Subdomain Distribution (%)</label>
+                                            
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Advanced Materials</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="cmfe_advanced_materials_percent" value="0" min="0" max="100" 
+                                                               data-domain="cmfe" data-subdomain="advanced_materials">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="cmfe_advanced_materials_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Consumer Goods</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="cmfe_consumer_goods_percent" value="0" min="0" max="100" 
+                                                               data-domain="cmfe" data-subdomain="consumer_goods">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="cmfe_consumer_goods_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Food and Beverages</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="cmfe_food_beverages_percent" value="0" min="0" max="100" 
+                                                               data-domain="cmfe" data-subdomain="food_beverages">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="cmfe_food_beverages_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Bulk Chemicals</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="cmfe_bulk_chemicals_percent" value="0" min="0" max="100" 
+                                                               data-domain="cmfe" data-subdomain="bulk_chemicals">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="cmfe_bulk_chemicals_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Specialty and Fine Chemicals</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="cmfe_specialty_chemicals_percent" value="0" min="0" max="100" 
+                                                               data-domain="cmfe" data-subdomain="specialty_chemicals">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="cmfe_specialty_chemicals_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Energy</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="cmfe_energy_percent" value="0" min="0" max="100" 
+                                                               data-domain="cmfe" data-subdomain="energy">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="cmfe_energy_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Packaging</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="cmfe_packaging_percent" value="0" min="0" max="100" 
+                                                               data-domain="cmfe" data-subdomain="packaging">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="cmfe_packaging_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Food Ingredients</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="cmfe_food_ingredients_percent" value="0" min="0" max="100" 
+                                                               data-domain="cmfe" data-subdomain="food_ingredients">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="cmfe_food_ingredients_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Polymers and Resins</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="cmfe_polymers_resins_percent" value="0" min="0" max="100" 
+                                                               data-domain="cmfe" data-subdomain="polymers_resins">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="cmfe_polymers_resins_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Agrochemicals</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="cmfe_agrochemicals_percent" value="0" min="0" max="100" 
+                                                               data-domain="cmfe" data-subdomain="agrochemicals">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="cmfe_agrochemicals_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Cosmetic Ingredients</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="cmfe_cosmetic_ingredients_percent" value="0" min="0" max="100" 
+                                                               data-domain="cmfe" data-subdomain="cosmetic_ingredients">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="cmfe_cosmetic_ingredients_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Green Chemicals <span class="badge bg-info text-white" style="font-size: 0.6em;">AUTO</span></label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="cmfe_green_chemicals_percent" value="0" min="0" max="100" 
+                                                               data-domain="cmfe" data-subdomain="green_chemicals" readonly>
+                                                        <small class="text-muted">% (auto-calculated)</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="cmfe_green_chemicals_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mt-2 p-2 bg-light rounded">
+                                                <small><strong>CMFE Total:</strong> <span id="cmfe_percent_total">0</span>% | <span id="cmfe_words_total">0</span> words</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Information Technology (ICT) Domain -->
+                            <div class="col-lg-4">
+                                <div class="card border-primary">
+                                    <div class="card-header bg-primary text-white">
+                                        <h6 class="mb-0">💻 ICT</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <!-- Domain Total -->
+                                        <div class="mb-3">
+                                            <label for="ict_total" class="form-label fw-bold">
+                                                Total ICT Words <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="number" class="form-control domain-input" id="ict_total" name="ict_total" 
+                                                   value="0" min="0" data-domain="ict">
+                                        </div>
+                                        
+                                        <!-- ICT Subdomains -->
+                                        <div class="subdomain-section" id="ict_subdomains" style="max-height: 400px; overflow-y: auto;">
+                                            <label class="form-label fw-semibold text-muted">Subdomain Distribution (%)</label>
+                                            
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Information and Communication Technology</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="ict_info_comm_tech_percent" value="0" min="0" max="100" 
+                                                               data-domain="ict" data-subdomain="info_comm_tech">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="ict_info_comm_tech_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Automotive and Transportation</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="ict_automotive_transport_percent" value="0" min="0" max="100" 
+                                                               data-domain="ict" data-subdomain="automotive_transport">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="ict_automotive_transport_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Industrial Automation and Machinery</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="ict_industrial_automation_percent" value="0" min="0" max="100" 
+                                                               data-domain="ict" data-subdomain="industrial_automation">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="ict_industrial_automation_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Smart Technologies</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="ict_smart_technologies_percent" value="0" min="0" max="100" 
+                                                               data-domain="ict" data-subdomain="smart_technologies">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="ict_smart_technologies_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Semiconductors</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="ict_semiconductors_percent" value="0" min="0" max="100" 
+                                                               data-domain="ict" data-subdomain="semiconductors">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="ict_semiconductors_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Consumer Electronics</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="ict_consumer_electronics_percent" value="0" min="0" max="100" 
+                                                               data-domain="ict" data-subdomain="consumer_electronics">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="ict_consumer_electronics_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Aerospace and Defense</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="ict_aerospace_defense_percent" value="0" min="0" max="100" 
+                                                               data-domain="ict" data-subdomain="aerospace_defense">
+                                                        <small class="text-muted">%</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="ict_aerospace_defense_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="form-label-sm">Construction Engineering <span class="badge bg-info text-white" style="font-size: 0.6em;">AUTO</span></label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control form-control-sm subdomain-percent" 
+                                                               name="ict_construction_engineering_percent" value="0" min="0" max="100" 
+                                                               data-domain="ict" data-subdomain="construction_engineering" readonly>
+                                                        <small class="text-muted">% (auto-calculated)</small>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control form-control-sm subdomain-words" 
+                                                               name="ict_construction_engineering_words" readonly>
+                                                        <small class="text-muted">words</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mt-2 p-2 bg-light rounded">
+                                                <small><strong>ICT Total:</strong> <span id="ict_percent_total">0</span>% | <span id="ict_words_total">0</span> words</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Overall Summary -->
+                        <div class="row g-3 mb-4">
+                            <div class="col-12">
+                                <div class="alert alert-success">
+                                    <h6 class="mb-2">📊 Overall Summary</h6>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <strong>Total Words:</strong> <span id="grand_total_words">0</span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <strong>HC:</strong> <span id="summary_hc">0</span> words
+                                        </div>
+                                        <div class="col-md-3">
+                                            <strong>CMFE:</strong> <span id="summary_cmfe">0</span> words
+                                        </div>
+                                        <div class="col-md-3">
+                                            <strong>ICT:</strong> <span id="summary_ict">0</span> words
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- File Upload -->
+                        <div class="row g-3 mb-4">
+                            <div class="col-12">
+                                <h6 class="text-primary mb-3">File Upload Section</h6>
+                            </div>
+                            <div class="col-12">
+                                <label for="file" class="form-label-modern">
+                                    Upload Weekly RID File Obtained in STEP 1  <span class="text-danger">*</span>
+                                </label>
+                                <input type="file" class="form-control form-control-modern" id="file" name="file" 
+                                       accept=".xlsx,.xls,.csv" required>
+                                <div class="form-text small text-muted mt-1">
+                                    Upload your Weekly RID file (.xlsx, .xls, .csv) - Max size: 16MB
+                                </div>
+                                <div id="fileValidation" class="mt-2"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Submit Buttons -->
+                        <div class="d-flex flex-column flex-md-row gap-2 justify-content-center mt-4">
+                            <button type="submit" class="btn btn-success-modern btn-modern" id="submitBtn">
+                                <i class="fas fa-play me-2"></i>Process File
+                            </button>
+                            <a href="{{ url_for('index') }}" class="btn btn-secondary-modern btn-modern">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Home
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Information Card -->
+            <div class="card-modern mt-4">
+                <div class="card-header-modern">
+                    <h6 class="mb-0">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Processing Details
+                    </h6>
+                </div>
+                <div class="card-body-modern">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <h6 class="fw-semibold mb-2">What This Does</h6>
+                            <ul class="list-unstyled small text-muted">
+                                <li><span class="status-dot status-success"></span>Reads your Weekly RID file by domain</li>
+                                <li><span class="status-dot status-success"></span>Extracts specified numbers per domain & subdomain</li>
+                                <li><span class="status-dot status-success"></span>Handles shortage by redistributing from surplus domains</li>
+                                <li><span class="status-dot status-success"></span>Creates ROB.xlsx for automation</li>
+                                <li><span class="status-dot status-success"></span>Generates remaining data file</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="fw-semibold mb-2">Domain Distribution Logic</h6>
+                            <ul class="list-unstyled small text-muted">
+                                <li><span class="status-dot status-info"></span><strong>Absolute Numbers:</strong> Enter exact word count per domain</li>
+                                <li><span class="status-dot status-info"></span><strong>Percentage Distribution:</strong> Specify % for each subdomain</li>
+                                <li><span class="status-dot status-warning"></span><strong>Remainder Handling:</strong> Extra words go to highest % subdomains</li>
+                                <li><span class="status-dot status-success"></span><strong>Shortage Management:</strong> Auto-redistributes from surplus domains</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="alert-modern alert-success-modern mt-3">
+                        <i class="fas fa-lightbulb me-2"></i>
+                        <strong>Example:</strong> HC: 25 words → Medical Devices: 40% (10 words), Pharmaceutical: 60% (15 words)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Domain and subdomain calculation logic
+function calculateSubdomainWords(domain) {
+    const totalInput = document.getElementById(domain + '_total');
+    const totalWords = parseInt(totalInput.value) || 0;
+    
+    const subdomainInputs = document.querySelectorAll(`[data-domain="${domain}"].subdomain-percent`);
+    let percentages = [];
+    
+    subdomainInputs.forEach(input => {
+        const percent = parseInt(input.value) || 0;
+        const subdomain = input.getAttribute('data-subdomain');
+        percentages.push({
+            subdomain: subdomain,
+            percent: percent,
+            element: input
+        });
+    });
+    
+    // Calculate base allocation for each subdomain
+    let allocations = [];
+    let totalAllocated = 0;
+    
+    percentages.forEach(item => {
+        const baseWords = Math.floor(totalWords * item.percent / 100);
+        allocations.push({
+            subdomain: item.subdomain,
+            percent: item.percent,
+            words: baseWords
+        });
+        totalAllocated += baseWords;
+    });
+    
+    // Calculate remainder and distribute to highest percentage subdomains
+    const remainder = totalWords - totalAllocated;
+    
+    if (remainder > 0) {
+        // Sort by percentage (descending) for remainder distribution
+        allocations.sort((a, b) => b.percent - a.percent);
+        
+        // Distribute remainder to highest percentage subdomains
+        for (let i = 0; i < remainder && i < allocations.length; i++) {
+            allocations[i].words += 1;
+        }
+    }
+    
+    // Update the UI
+    let totalPercent = 0;
+    let totalWordsCalculated = 0;
+    
+    allocations.forEach(item => {
+        const wordsInput = document.querySelector(`[name="${domain}_${item.subdomain}_words"]`);
+        if (wordsInput) {
+            wordsInput.value = item.words;
+        }
+        totalPercent += item.percent;
+        totalWordsCalculated += item.words;
+    });
+    
+    // Update totals display
+    document.getElementById(domain + '_percent_total').textContent = totalPercent;
+    document.getElementById(domain + '_words_total').textContent = totalWordsCalculated;
+    
+    // Update color coding for percentage validation
+    const percentTotalElement = document.getElementById(domain + '_percent_total');
+    if (totalPercent === 100) {
+        percentTotalElement.className = 'text-success fw-bold';
+    } else if (totalPercent > 100) {
+        percentTotalElement.className = 'text-danger fw-bold';
+    } else {
+        percentTotalElement.className = 'text-warning fw-bold';
+    }
+    
+    updateGrandTotal();
+}
+
+function updateGrandTotal() {
+    const hcTotal = parseInt(document.getElementById('hc_total').value) || 0;
+    const cmfeTotal = parseInt(document.getElementById('cmfe_total').value) || 0;
+    const ictTotal = parseInt(document.getElementById('ict_total').value) || 0;
+    
+    const grandTotal = hcTotal + cmfeTotal + ictTotal;
+    
+    document.getElementById('grand_total_words').textContent = grandTotal;
+    document.getElementById('summary_hc').textContent = hcTotal;
+    document.getElementById('summary_cmfe').textContent = cmfeTotal;
+    document.getElementById('summary_ict').textContent = ictTotal;
+}
+
+// Event listeners for domain inputs
+document.getElementById('hc_total').addEventListener('input', () => {
+    autoCalculateLastSubdomain('hc');
+    calculateSubdomainWords('hc');
+});
+document.getElementById('cmfe_total').addEventListener('input', () => {
+    autoCalculateLastSubdomain('cmfe');
+    calculateSubdomainWords('cmfe');
+});
+document.getElementById('ict_total').addEventListener('input', () => {
+    autoCalculateLastSubdomain('ict');
+    calculateSubdomainWords('ict');
+});
+
+// Auto-calculate last subdomain percentage
+function autoCalculateLastSubdomain(domain) {
+    const subdomainInputs = document.querySelectorAll(`[data-domain="${domain}"].subdomain-percent`);
+    const inputsArray = Array.from(subdomainInputs);
+    
+    if (inputsArray.length === 0) return;
+    
+    const lastInput = inputsArray[inputsArray.length - 1];
+    const otherInputs = inputsArray.slice(0, -1);
+    
+    // Calculate sum of all other inputs
+    let sumOthers = 0;
+    otherInputs.forEach(input => {
+        sumOthers += parseInt(input.value) || 0;
+    });
+    
+    // Auto-calculate last input as 100 - sumOthers (but not less than 0)
+    const lastValue = Math.max(0, Math.min(100, 100 - sumOthers));
+    lastInput.value = lastValue;
+    
+    // Add visual styling for auto-calculated field
+    if (sumOthers > 0) {
+        lastInput.style.backgroundColor = '#e3f2fd';
+        lastInput.style.fontWeight = 'bold';
+        lastInput.title = `Auto-calculated: 100 - ${sumOthers} = ${lastValue}%`;
+    } else {
+        lastInput.style.backgroundColor = '#f8f9fa';
+        lastInput.style.fontWeight = 'normal';
+        lastInput.title = 'This field will auto-calculate when you enter other percentages';
+    }
+}
+
+// Event listeners for subdomain percentage inputs
+document.querySelectorAll('.subdomain-percent').forEach(input => {
+    input.addEventListener('input', function() {
+        const domain = this.getAttribute('data-domain');
+        const subdomainInputs = document.querySelectorAll(`[data-domain="${domain}"].subdomain-percent`);
+        const inputsArray = Array.from(subdomainInputs);
+        const lastInput = inputsArray[inputsArray.length - 1];
+        
+        // Only auto-calculate if this is NOT the last input
+        if (this !== lastInput) {
+            autoCalculateLastSubdomain(domain);
+        }
+        
+        calculateSubdomainWords(domain);
+    });
+});
+
+// File validation
+document.getElementById('file').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    const validation = document.getElementById('fileValidation');
+    
+    if (file) {
+        const fileSize = (file.size / 1024 / 1024).toFixed(2);
+        const allowedTypes = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 
+                             'application/vnd.ms-excel', 'text/csv'];
+        
+        if (allowedTypes.includes(file.type) || file.name.endsWith('.xlsx') || file.name.endsWith('.xls') || file.name.endsWith('.csv')) {
+            if (file.size <= 16 * 1024 * 1024) {
+                validation.innerHTML = `<div class="alert-modern alert-success-modern">
+                    <i class="fas fa-check-circle me-2"></i>File selected: ${file.name} (${fileSize} MB)
+                </div>`;
+            } else {
+                validation.innerHTML = `<div class="alert-modern alert-danger-modern">
+                    <i class="fas fa-exclamation-triangle me-2"></i>File too large. Maximum size is 16MB.
+                </div>`;
+            }
+        } else {
+            validation.innerHTML = `<div class="alert-modern alert-warning-modern">
+                <i class="fas fa-exclamation-triangle me-2"></i>Invalid file type. Please select an Excel or CSV file.
+            </div>`;
+        }
+    }
+});
+
+// Form validation
+document.getElementById('robForm').addEventListener('submit', function(e) {
+    const submitBtn = document.getElementById('submitBtn');
+    const grandTotal = parseInt(document.getElementById('grand_total_words').textContent) || 0;
+    
+    // Check if at least one domain has words
+    if (grandTotal === 0) {
+        e.preventDefault();
+        alert('Please enter at least one domain with word count greater than 0.');
+        return;
+    }
+    
+    // Check percentage totals
+    const domains = ['hc', 'cmfe', 'ict'];
+    let hasValidPercentages = true;
+    
+    domains.forEach(domain => {
+        const domainTotal = parseInt(document.getElementById(domain + '_total').value) || 0;
+        const percentTotal = parseInt(document.getElementById(domain + '_percent_total').textContent) || 0;
+        
+        if (domainTotal > 0 && percentTotal !== 100) {
+            hasValidPercentages = false;
+        }
+    });
+    
+    if (!hasValidPercentages) {
+        const confirm = window.confirm('Some domains have subdomain percentages that do not total 100%. Do you want to continue anyway?');
+        if (!confirm) {
+            e.preventDefault();
+            return;
+        }
+    }
+    
+    submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin me-2"></i>Processing ${grandTotal} words...`;
+    submitBtn.disabled = true;
+});
+
+// Initialize calculations on page load
+document.addEventListener('DOMContentLoaded', function() {
+    updateGrandTotal();
+    // Initialize auto-calculation for all domains
+    autoCalculateLastSubdomain('hc');
+    autoCalculateLastSubdomain('cmfe');
+    autoCalculateLastSubdomain('ict');
+});
+</script>
+{% endblock %}

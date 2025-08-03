@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+
+{% block title %}Custom OpenPR Publishing{% endblock %}
+
+{% block content %}
+<div class="container-modern">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Header -->
+            <div class="text-center mb-4">
+                <h2 class="fw-bold text-dark">Custom OpenPR Publishing</h2>
+                <p class="text-muted">Automated custom content publishing to OpenPR platform</p>
+            </div>
+
+            <!-- Session Data Alert -->
+            {% if session_data.username %}
+            <div class="alert-modern alert-success-modern mb-4">
+                <i class="fas fa-check-circle me-2"></i>
+                <strong>Auto-populated from ROB form:</strong>
+                {{ session_data.username }} | {{ session_data.email }} | PR ID: {{ session_data.open_pr_id }}
+            </div>
+            {% endif %}
+
+            <!-- Main Configuration -->
+            <div class="card-modern">
+                <div class="card-header-modern">
+                    <h6 class="mb-0">
+                        <i class="fas fa-cogs me-2"></i>
+                        Custom Publishing Configuration
+                    </h6>
+                </div>
+                <div class="card-body-modern">
+                    <form method="POST" id="customDocProcessingForm">
+                        <div class="row g-3">
+                            <!-- User Information -->
+                            <div class="col-12">
+                                <h6 class="text-primary mb-3">User Information</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="author_name" class="form-label-modern">
+                                    Username <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control form-control-modern" id="author_name" 
+                                       name="author_name" value="{{ session_data.username or 'Vishwas tiwari' }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="author_email" class="form-label-modern">
+                                    Email <span class="text-danger">*</span>
+                                </label>
+                                <input type="email" class="form-control form-control-modern" id="author_email" 
+                                       name="author_email" value="{{ session_data.email or 'vishwas@coherentmarketinsights.com' }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="company_name" class="form-label-modern">
+                                    Company Name <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control form-control-modern" id="company_name" 
+                                       name="company_name" value="Coherent Market Insights" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone_number" class="form-label-modern">
+                                    Phone Number <span class="text-danger">*</span>
+                                </label>
+                                <input type="tel" class="form-control form-control-modern" id="phone_number" 
+                                       name="phone_number" value="{{ session_data.mobile or '1234567890' }}" required>
+                            </div>
+
+                            <!-- Publishing Settings -->
+                            <div class="col-12 mt-4">
+                                <h6 class="text-primary mb-3">Publishing Settings</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="article_code" class="form-label-modern">
+                                    Article Code (PR ID)
+                                </label>
+                                <input type="text" class="form-control form-control-modern" id="article_code" 
+                                       name="article_code" value="{{ session_data.open_pr_id }}">
+                                <div class="form-text small text-muted mt-1">
+                                    {% if session_data.open_pr_id %}
+                                        Using PR ID from ROB form
+                                    {% else %}
+                                        Default code will be used if empty
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="processing_mode" class="form-label-modern">
+                                    Processing Mode <span class="text-danger">*</span>
+                                </label>
+                                <select class="form-control form-control-modern" id="processing_mode" name="processing_mode" required>
+                                    <option value="auto">Automatic (No interruption)</option>
+                                    <option value="manual">Manual (Pause between articles)</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="image_path" class="form-label-modern">
+                                    Image Path <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control form-control-modern" id="image_path" 
+                                       name="image_path" placeholder="Enter full path to image file (e.g., C:\path\to\your\image.jpg)" required>
+                                <div class="form-text small text-muted mt-1">
+                                    Supported formats: .jpg, .jpeg, .png, .gif
+                                </div>
+                            </div>
+
+                            <!-- Folder Configuration -->
+                            <div class="col-12 mt-4">
+                                <h6 class="text-primary mb-3">Folder Configuration</h6>
+                            </div>
+                            <div class="col-12">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="folder_option" 
+                                                   id="use_today" value="today" checked>
+                                            <label class="form-check-label fw-semibold" for="use_today">
+                                                Use Today's Date Folder
+                                            </label>
+                                        </div>
+                                        <div class="form-text small text-muted ms-3">
+                                            Path: C:\Users\akshat\Desktop\RPA\Files\[YYYY]\[MM]\[DD]
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="folder_option" 
+                                                   id="use_custom" value="custom">
+                                            <label class="form-check-label fw-semibold" for="use_custom">
+                                                Use Custom Folder Path
+                                            </label>
+                                        </div>
+                                        <input type="text" class="form-control form-control-modern mt-2" id="custom_folder" 
+                                               name="custom_folder" placeholder="Enter custom folder path" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Submit Buttons -->
+                        <div class="d-flex flex-column flex-md-row gap-3 justify-content-center mt-4">
+                            <button type="button" class="btn btn-cmi-modern btn-modern" id="cmiBtn">
+                                <i class="fas fa-play me-2"></i>Start Publishing Custom CMI Articles
+                            </button>
+                            <button type="button" class="btn btn-wmr-modern btn-modern" id="wmrBtn">
+                                <i class="fas fa-play me-2"></i>Start Publishing Custom WMR Articles
+                            </button>
+                        </div>
+                        
+                        <!-- Back Button -->
+                        <div class="text-center mt-3">
+                            <a href="/custom_index.html" class="btn btn-secondary-modern btn-modern">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Custom Home
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.btn-cmi-modern {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border: none;
+}
+
+.btn-cmi-modern:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    color: white;
+}
+
+.btn-wmr-modern {
+    background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+    color: white;
+    border: none;
+}
+
+.btn-wmr-modern:hover {
+    background: linear-gradient(135deg, #0e7490 0%, #155e75 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);
+    color: white;
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Handle folder option radio buttons
+document.querySelectorAll('input[name="folder_option"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        const customFolder = document.getElementById('custom_folder');
+        if (this.value === 'custom') {
+            customFolder.disabled = false;
+            customFolder.required = true;
+        } else {
+            customFolder.disabled = true;
+            customFolder.required = false;
+            customFolder.value = '';
+        }
+    });
+});
+
+// CMI Button click handler (no functionality yet)
+document.getElementById('cmiBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    console.log('CMI Publishing clicked - functionality to be added');
+    // TODO: Add CMI publishing functionality
+});
+
+// WMR Button click handler (no functionality yet)
+document.getElementById('wmrBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    console.log('WMR Publishing clicked - functionality to be added');
+    // TODO: Add WMR publishing functionality
+});
+</script>
+{% endblock %}

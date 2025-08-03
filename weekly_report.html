@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly RID Analysis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .container-modern {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .card-modern {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            background: #ffffff;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-modern:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header-modern {
+            background: linear-gradient(135deg, #495057 0%, #6c757d 100%);
+            color: white;
+            border-bottom: none;
+            padding: 1.75rem;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .card-header-modern h5 {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .card-body-modern {
+            padding: 2rem;
+        }
+
+        .btn-modern {
+            border-radius: 10px;
+            font-weight: 500;
+            border: none;
+            padding: 0.875rem 2rem;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary-modern {
+            background: linear-gradient(135deg, #495057 0%, #6c757d 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(73, 80, 87, 0.3);
+        }
+
+        .btn-primary-modern:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(73, 80, 87, 0.4);
+        }
+
+        .btn-secondary-modern {
+            background: #f8f9fa;
+            color: #495057;
+            border: 1px solid #dee2e6;
+        }
+
+        .btn-secondary-modern:hover {
+            background: #e9ecef;
+            color: #495057;
+            transform: translateY(-1px);
+        }
+
+        .form-control-modern {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 0.875rem 1rem;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .form-control-modern:focus {
+            border-color: #6c757d;
+            box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.1);
+            outline: none;
+        }
+
+        .form-label-modern {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        .alert-modern {
+            border: none;
+            border-radius: 10px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .alert-success-modern {
+            background: #d1fae5;
+            color: #065f46;
+            border-left: 4px solid #10b981;
+        }
+
+        .alert-danger-modern {
+            background: #fee2e2;
+            color: #991b1b;
+            border-left: 4px solid #ef4444;
+        }
+
+        .file-upload-area {
+            border: 2px dashed #d1d5db;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            background: #fafbfc;
+        }
+
+        .file-upload-area:hover {
+            border-color: #6c757d;
+            background: #f8f9fa;
+        }
+
+        .competition-select {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 0.875rem 1rem;
+        }
+
+        .priority-info {
+            background: #f8f9fa;
+            border-left: 4px solid #6c757d;
+            padding: 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .domain-info {
+            background: #ecfdf5;
+            border-left: 4px solid #10b981;
+            padding: 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .auto-adjust-info {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 0.6rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .icon-success { background: #dcfce7; color: #166534; }
+        .icon-info { background: #dbeafe; color: #1e40af; }
+        .icon-warning { background: #fef3c7; color: #92400e; }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .header-section h1 {
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-section p {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+
+        .checkbox-modern {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-modern:hover {
+            background: #f3f4f6;
+            border-color: #6c757d;
+        }
+
+        .checkbox-modern input {
+            margin-right: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            .container-modern {
+                padding: 1rem;
+            }
+            
+            .card-body-modern {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-modern">
+        <!-- Header -->
+        <div class="header-section">
+            <h1 class="fw-bold text-dark mb-2">Weekly RID Processing</h1>
+            <p class="text-muted">Advanced keyword matching with equal domain distribution & smart adjustments</p>
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert-modern {{ 'alert-success-modern' if '✅' in message else 'alert-danger-modern' }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Main Form -->
+        <div class="card-modern">
+            <div class="card-header-modern">
+                <h5 class="mb-0">
+                    <i class="fas fa-chart-line me-2"></i>
+                    Weekly RID Processing Form
+                </h5>
+            </div>
+            <div class="card-body-modern">
+                <form method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="form_type" value="rid_processing">
+
+                    <!-- Target Count -->
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="target_count" class="form-label-modern">
+                                Enter the Number of PRs you want to publish this week
+                            </label>
+                            <input type="number" class="form-control form-control-modern" 
+                                   id="target_count" name="target_count" 
+                                   value="1200" min="1" max="10000" required>
+                            <div class="form-text small text-muted">
+                               
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Google Trends Option -->
+                    <div class="checkbox-modern mt-3">
+                        <input class="form-check-input" type="checkbox" id="analyze_trends" name="analyze_trends">
+                        <label class="form-check-label" for="analyze_trends">
+                            <i class="fab fa-google me-2"></i>
+                            <strong>Enable Google Trends Analysis</strong>
+                            <div class="small text-muted">Additional filtering for trending keywords (recommended for quality)</div>
+                        </label>
+                    </div>
+
+                    <!-- Competition Filter -->
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-12">
+                            <label for="competition_level" class="form-label-modern">
+                                Competition Priority Filter
+                            </label>
+                            <select class="form-control form-control-modern competition-select" 
+                                    id="competition_level" name="competition_level" required>
+                                <option value="Low">🟢 Low Competition Only</option>
+                                <option value="Medium">🟡 Low + Medium Competition</option>
+                                <option value="High" selected>🔴 Low + Medium + High Competition</option>
+                                <option value="All">⚪ All Competition Levels</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    
+
+
+                    
+
+                    <!-- File Upload Section -->
+                    <div class="mt-4">
+                        <h6 class="text-primary mb-3">File Upload Section</h6>
+                        
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="file-upload-area">
+                                    <i class="fas fa-file-excel fa-2x text-success mb-2"></i>
+                                    <label for="ranking_file" class="form-label-modern d-block">
+                                        Monthly Ranking Sheet
+                                    </label>
+                                    <input type="file" class="form-control form-control-modern" 
+                                           id="ranking_file" name="ranking_file" accept=".xlsx,.xls,.csv" required>
+                                    <small class="text-muted"> Excel with RID, Domain,Sub Domain,Keywords,AVG. Search,Competition(in order)</small>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="file-upload-area">
+                                    <i class="fas fa-database fa-2x text-info mb-2"></i>
+                                    <label for="cleaned_rob_file" class="form-label-modern d-block">
+                                        Backend File
+                                    </label>
+                                    <input type="file" class="form-control form-control-modern" 
+                                           id="cleaned_rob_file" name="cleaned_rob_file" accept=".xlsx,.xls" required>
+                                    <small class="text-muted">Database Excel</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary-modern btn-modern">
+                            <i class="fas fa-magic me-2"></i>
+                            Start Smart Analysis & Matching
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Process Information -->
+        <div class="card-modern">
+            <div class="card-header-modern">
+                <h6 class="mb-0">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Improved Process Overview
+                </h6>
+            </div>
+            <div class="card-body-modern">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <h6 class="fw-semibold mb-3">Smart Analysis Steps</h6>
+                        <ul class="feature-list">
+                            <li>
+                                <span class="feature-icon icon-success">1</span>
+                                <strong>Equal Domain Distribution</strong> (HC, ICT, CMFE)
+                            </li>
+                            <li>
+                                <span class="feature-icon icon-info">2</span>
+                                <strong>Google Trends Analysis</strong> (if enabled)
+                            </li>
+                            <li>
+                                <span class="feature-icon icon-warning">3</span>
+                                <strong>Adaptive Search Volume</strong> (5000→500→50)
+                            </li>
+                            <li>
+                                <span class="feature-icon icon-info">4</span>
+                                <strong>Competition Priority Filter</strong>
+                            </li>
+                            <li>
+                                <span class="feature-icon icon-success">5</span>
+                                <strong>ROB Matching & Export</strong> to Desktop/RPA
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="fw-semibold mb-3">Smart Features</h6>
+                        <ul class="feature-list">
+                            <li>
+                                <span class="feature-icon icon-success">🎯</span>
+                                <strong>Equal distribution</strong> across domains
+                            </li>
+                            <li>
+                                <span class="feature-icon icon-success">🤖</span>
+                                <strong>Auto search volume</strong> adjustment
+                            </li>
+                            <li>
+                                <span class="feature-icon icon-success">📊</span>
+                                <strong>Shortage notifications</strong> with recommendations
+                            </li>
+                            <li>
+                                <span class="feature-icon icon-success">📈</span>
+                                <strong>Priority-based</strong> keyword selection
+                            </li>
+                            <li>
+                                <span class="feature-icon icon-success">💡</span>
+                                <strong>Smart suggestions</strong> for next time
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Example Output -->
+                <div class="mt-4 p-3" style="background: #f8f9fa; border-radius: 8px; border-left: 4px solid #6c757d;">
+                    <h6 class="fw-semibold text-primary mb-2">Example Smart Output:</h6>
+                    <div class="small">
+                        <div>✅ Success! Found 1180 qualified RIDs</div>
+                        <div>📊 Original Data: Total=2500, HC=800, ICT=850, CMFE=850</div>
+                        <div>🎯 Target: 1200 words (400 per domain)</div>
+                        <div>🎯 Achieved: HC=400, ICT=380, CMFE=400</div>
+                        <div>⚠️ ICT Domain Shortage: 20 words (filled from other domains)</div>
+                        <div>🔄 Auto-adjusted search volume: 5,000 → 500</div>
+                        <div>💡 Recommendation: Add 20 more ICT domain words next time</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Home -->
+        <div class="text-center">
+            <a href="/index.html" class="btn btn-secondary-modern btn-modern">
+                <i class="fas fa-arrow-left me-2"></i>
+                Back to Home
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
