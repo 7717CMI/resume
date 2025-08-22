@@ -1,0 +1,179 @@
+%-------------------------
+% Resume in Latex
+% Author: Vishal Verma
+% License : MIT
+%------------------------
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{latexsym}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{ragged2e}
+\usepackage[empty]{fullpage}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage{marvosym}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\setlength{\multicolsep}{0pt} 
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\geometry{left=1.0cm, top=0.5cm, right=1.0cm, bottom=0.5cm}
+
+\usepackage[most]{tcolorbox}
+\tcbset{
+	frame code={}
+	center title,
+	left=0pt,
+	right=0pt,
+	top=0pt,
+	bottom=0pt,
+	colback=gray!20,
+	colframe=white,
+	width=\dimexpr\textwidth\relax,
+	enlarge left by=-2mm,
+	boxsep=3pt,
+	arc=0pt,outer arc=0pt,
+}
+
+\urlstyle{same}
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\normalsize
+}{}{0em}{}[\color{black}\titlerule \vspace{-6pt}]
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeSubheading}[4]{
+\vspace{0.2mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#4}} \\
+        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
+    \end{tabular*}
+    \vspace{-2mm}
+}
+
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=0mm]}
+\newcommand{\resumeItemListStart}{\begin{justify}\begin{itemize}[leftmargin=3ex, rightmargin=2ex, noitemsep,labelsep=1mm,itemsep=0mm]\scriptsize}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{1mm}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\end{justify}\vspace{-1mm}}
+
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+
+\usepackage{lmodern}
+\renewcommand{\familydefault}{\rmdefault}
+
+\begin{document}
+\small
+
+%----------HEADING-----------------
+% Use a professional font
+%----------HEADING-----------------
+
+% Header with logo on the left and info on the right, aligned side by side
+\parbox{2.2cm}{%
+\includegraphics[width=1.9cm,clip]{imageslo.jpeg}
+}
+\parbox{\dimexpr\linewidth-2.6cm\relax}{
+\begin{tabularx}{\linewidth}{L r} \\
+  \textbf{\Large Vishal Verma} & {\faPhone} +91-9027077680 \\
+  {Bachelor of Technology, Computer Science and Engineering} & {\faEnvelope} \href{mailto:vishal.2022ug1068@iiitranchi.ac.in}{vishal.2022ug1068@iiitranchi.ac.in} \\
+  {Indian Institute Of Information Technology, Ranchi} & {\faEnvelope} \href{mailto:vermavishal6020@gmail.com}{vermavishal6020@gmail.com} \\
+  {} & {\faLinkedin} \href{https://www.linkedin.com/in/vishalverma123/}{LinkedIn} \\
+  & {\faGithub} \href{https://github.com/VishalVermaa01}{GitHub} \\
+\end{tabularx}
+}
+
+
+%-----------EDUCATION-----------
+\section*{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Indian Institute Of Information Technology, Ranchi}{CGPA: 7.85}
+      {B.Tech (Computer Science and Engineering)}{2022 - 2026}
+  \resumeSubHeadingListEnd
+
+
+%-----------TECHNICAL SKILLS-----------
+\section*{Technical Skills}
+\vspace{-1mm}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\textbf{Blockchain Technologies:} & Ethereum, Hyperledger Fabric, Internet Computer Protocol (ICP), Solidity, Web3.js, Ethers.js \\[1pt]
+\textbf{AI/ML Frameworks:} & LangChain, OpenAI GPT-3/4, ChromaDB, TensorFlow, PyTorch, Scikit-learn \\[1pt]
+\textbf{Programming Languages:} & Solidity, JavaScript, TypeScript, Python, C++, SQL, Rust \\[1pt]
+\textbf{Development Tools:} & Hardhat, Truffle, Foundry, Remix IDE, Git, Docker, Postman \\[1pt]
+\textbf{Web3 \& DeFi:} & Smart Contracts, dApp Development, DeFi Protocols, IPFS, MetaMask, Multi-signature Wallets \\[1pt]
+\textbf{Databases \& Cloud:} & MongoDB, MySQL, PostgreSQL, AWS, Vector Databases \\[1pt]
+\end{tabularx}
+
+%-----------EXPERIENCE-----------
+\section*{Experience}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Bharat Electronics Limited (BEL) \href{https://drive.google.com/file/d/1iYzx7XsMbauIRKlJ68oI9NJeO2Cv-tAK/view?usp=drive_link}{\faLink}}{Bangalore, India}
+      {Blockchain Software Development Intern}{June 2024 - July 2024}
+      \resumeItemListStart
+        \item Architected blockchain-based certificate management system using Hyperledger Fabric, improving data security by 40\% and reducing verification time from hours to minutes for 500+ employees
+        \item Designed and deployed smart contracts with chaincode for secure certificate issuance, validation, and audit trails, ensuring 100\% compliance with organizational standards
+        \item Optimized consensus algorithms and network configuration, achieving 95\% transaction throughput improvement and implementing zero-knowledge proof concepts for enhanced privacy
+        \item Developed blockchain analytics dashboard using Python and Web3.py, providing real-time monitoring of 1000+ daily transactions and automated anomaly detection with 92\% accuracy
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {QuadB Technologies}{Remote}
+      {Blockchain \& AI Development Trainee}{February 2024 - April 2024}
+      \resumeItemListStart
+        \item Developed 3 decentralized applications using Internet Computer Protocol (ICP), achieving 99.9\% uptime and serving 200+ active users
+        \item Built Privy ICP authentication solution implementing OAuth and wallet-based login, reducing user onboarding time by 60\%
+        \item Integrated AI-powered smart contract auditing tools using machine learning algorithms, detecting 98\% of potential vulnerabilities and reducing manual audit time by 70\%
+        \item Implemented cross-chain bridge protocols connecting Ethereum and ICP networks, facilitating seamless asset transfers worth \$250K+ in test environments with 99.8\% success rate
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+%-----------PROJECTS-----------
+\section*{Projects}
+
+\textbf{Codolysis - AI-Powered Code Analysis Platform} \hfill \href{https://github.com/VishalVermaa01/Codolysis}{GitHub \faExternalLink*} \\
+\textit{Python, LangChain, Flask, OpenAI GPT-3, ChromaDB} \\
+\begin{itemize}[leftmargin=*, itemsep=0.5pt, topsep=1pt]
+  \item Built intelligent code analysis tool leveraging LangChain and OpenAI GPT-3 for automated code review, optimization suggestions, and documentation generation
+  \item Implemented vector database using ChromaDB for efficient code similarity search and pattern recognition across large codebases
+  \item Developed RESTful API with Flask serving 500+ daily analysis requests and deployed scalable web interface supporting concurrent analysis of multiple programming languages
+\end{itemize}
+
+\textbf{EstateChain - Decentralized Real Estate Marketplace} \hfill \href{https://github.com/VishalVermaa01/estateChain}{GitHub \faExternalLink*} \\
+\textit{Solidity, Hardhat, React.js, IPFS, Web3.js} \\
+\begin{itemize}[leftmargin=*, itemsep=0.5pt, topsep=1pt]
+  \item Developed comprehensive marketplace for real estate transactions with fractional ownership, escrow services, and transparent governance mechanisms
+  \item Integrated IPFS for decentralized document storage and governance tokens for community voting, achieving 95\% reduction in transaction fees
+  \item Implemented advanced security features including multi-signature wallets and automated audit trails, processing \$100K+ in test transactions with zero security breaches
+\end{itemize}
+
+%-----------ACHIEVEMENTS AND CERTIFICATIONS-----------
+\section*{Achievements \& Certifications}
+\vspace{-1mm}
+\begin{itemize}[leftmargin=*, itemsep=0.5pt]
+    \item \textbf{Top 3 Finalist} - Web3 Hackathon, VIT University Andhra Pradesh (100+ teams) \hfill \textit{April 2024}
+    \item \textbf{Blockchain Developer Certification} - \href{https://drive.google.com/file/d/1gMfxCbUw9wyvV9THcDd_5QkCgwSUUZOU/view?usp=drive_link}{University at Buffalo, SUNY} - dApps Development Specialization \hfill \textit{2024}
+    \item \textbf{Open Source:} 500+ GitHub contributions with 50+ stars across blockchain projects
+\end{itemize}
+
+\end{document}
